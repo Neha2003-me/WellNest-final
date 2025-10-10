@@ -15,8 +15,8 @@ export default function LoggedIn() {
         <Navbar></Navbar>
 
         <Home></Home>
-        <Chatbot></Chatbot>
         <Tests></Tests>
+        <Chatbot></Chatbot>
         <Score></Score>
         <TodoList></TodoList>
         <GoogleMaps></GoogleMaps>

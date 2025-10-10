@@ -11,7 +11,7 @@ const TodoList = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("https://wellnest-5zry.onrender.com/api/tasks");
+      const res = await axios.get("https://well-nest-final-molh.vercel.app/api/tasks");
       setTasks(res.data);
     } catch (err) {
       console.error(err);
@@ -24,7 +24,7 @@ const TodoList = () => {
       updatedTasks[taskIndex].completed = completed; // Update completion status
 
       // Send update request to the backend
-      await axios.put(`https://wellnest-5zry.onrender.com/api/tasks/${taskId}`, {
+      await axios.put(`https://well-nest-final-molh.vercel.app/api/tasks/${taskId}`, {
         taskIndex,
         completed,
       });
@@ -48,7 +48,7 @@ const TodoList = () => {
       console.log("Undo action:", lastAction);
 
       // Toggle task back to previous state
-      await axios.put(`https://wellnest-5zry.onrender.com/api/tasks/${taskId}`, {
+      await axios.put(`https://well-nest-final-molh.vercel.app/api/tasks/${taskId}`, {
         taskIndex,
         completed: previousState, // Revert to previous state
       });

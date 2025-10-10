@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://wellnest-5zry.onrender.com/api';
+const API_BASE_URL = 'https://well-nest-final-molh.vercel.app/api';
 
 export const login = async (email, password) => {
   try {

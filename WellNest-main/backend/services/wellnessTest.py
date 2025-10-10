@@ -83,7 +83,7 @@ if st.button("Calculate Health Score"):
 
     try:
         response = requests.post(
-            "https://wellnest-5zry.onrender.com/api/test/wellness-score",
+            "https://well-nest-final-molh.vercel.app/api/test/wellness-score",
             json={"email": email, "score": overall_score}
         )
         if response.status_code == 200:

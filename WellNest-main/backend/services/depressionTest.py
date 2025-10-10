@@ -46,7 +46,7 @@ if st.button("Submit"):
     if email:
         try:
             response = requests.post(
-                "https://wellnest-5zry.onrender.com/api/test/depression-score",
+                "https://well-nest-final-molh.vercel.app/api/test/depression-score",
                 json={"email": email, "score": score}
             )
             if response.status_code == 200:

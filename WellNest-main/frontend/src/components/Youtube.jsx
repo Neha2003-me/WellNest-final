@@ -11,7 +11,7 @@ const Youtube = () => {
 
   const fetchVideos = async (query, setVideos) => {
     try {
-      const response = await axios.post("https://wellnest-5zry.onrender.com/api/youtube-search", { query });
+      const response = await axios.post("https://well-nest-final-molh.vercel.app/api/youtube-search", { query });
       setVideos(response.data);
     } catch (error) {
       console.error(`Error fetching ${query} videos:`, error);

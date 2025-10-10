@@ -36,7 +36,7 @@ const Tests = () => {
         initial="hidden"
         animate="visible"
       >
-        Your Mental Health Matters
+        Take up these questionnaires!
       </motion.h1>
 
       {/* Buttons Container */}

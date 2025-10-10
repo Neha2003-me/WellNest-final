@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import LoggedIn from "./components/LoggedIn";
 import Profile from "./components/Profile"; 
 import Dashboard from "./components/Dashboard";
+import JournalPage from "./components/JournalPage"; // adjust the path if needed
+
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0(); // Use Auth0's authentication state
@@ -36,6 +38,13 @@ function App() {
             isAuthenticated ? <Dashboard /> : <Navigate to="/" />
           }
         />
+        <Route
+        path="/loggedin/journal"
+        element={
+          isAuthenticated ? <JournalPage /> : <Navigate to="/" />
+        }
+       />
+
       </Routes>
     </BrowserRouter>
   );

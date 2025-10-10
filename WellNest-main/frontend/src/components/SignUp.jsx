@@ -16,7 +16,7 @@ const SignUp = ({ onSwitch }) => {
 
     try {
       // Send a POST request to the backend
-      const response = await fetch('https://wellnest-5zry.onrender.com/api/signup', {
+      const response = await fetch('https://well-nest-final-molh.vercel.app/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
