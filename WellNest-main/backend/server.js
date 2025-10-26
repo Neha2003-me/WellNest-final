@@ -46,7 +46,7 @@ app.use('/api/reminders', reminderRoutes);
 app.use("/api/journal", journalRoutes);
 
 // 🆕 Email and Cron setup for sending reminders
-const transporter = nodemailer.createTransport({
+/*const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
@@ -79,7 +79,7 @@ cron.schedule('* * * * *', async () => {
   } catch (err) {
     console.error('Error checking reminders:', err.message);
   }
-});
+});*/
 
 // ✅ Start the server
 app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));
