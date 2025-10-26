@@ -3,14 +3,7 @@ const Reminder = require("../models/Reminder");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 
-// Email transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// -------------------- Existing Routes --------------------
 
 // ➕ Add new reminder
 router.post("/add-reminder", async (req, res) => {
@@ -19,6 +12,7 @@ router.post("/add-reminder", async (req, res) => {
     await reminder.save();
     res.status(201).json({ message: "Reminder added successfully" });
   } catch (err) {
+    console.error("Error in /add-reminder:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -32,6 +26,7 @@ router.post("/get-reminders", async (req, res) => {
     const history = all.filter((r) => r.status !== "Active");
     res.json({ active, history });
   } catch (err) {
+    console.error("Error in /get-reminders:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -43,6 +38,7 @@ router.post("/mark-taken", async (req, res) => {
     await Reminder.findByIdAndUpdate(id, { status: "Taken" });
     res.json({ message: "Marked as taken" });
   } catch (err) {
+    console.error("Error in /mark-taken:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -53,13 +49,28 @@ router.delete("/delete-reminder/:id", async (req, res) => {
     await Reminder.findByIdAndDelete(req.params.id);
     res.json({ message: "Reminder deleted" });
   } catch (err) {
+    console.error("Error in /delete-reminder:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// 🕒 Check reminders — for Vercel + external scheduler
+// -------------------- New Cron Endpoint --------------------
+
+// 🕒 Check reminders — to be called by external scheduler
 router.get("/check-reminders", async (req, res) => {
   try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      return res.status(500).json({ error: "Email credentials not set" });
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
     const reminders = await Reminder.find({ status: "Active" });
     const now = new Date();
 
@@ -85,7 +96,7 @@ router.get("/check-reminders", async (req, res) => {
 
     res.json({ message: "Checked reminders" });
   } catch (err) {
-    console.error("Error checking reminders:", err.message);
+    console.error("Error in /check-reminders:", err);
     res.status(500).json({ error: err.message });
   }
 });
